@@ -37,34 +37,34 @@ class FamilyStructure:
         return self._members
 
 
-member = {"name": "luis",
-          "age": 25,
-          "cargo": "Jefe 1",
-          "members": [{"nombre": "Juan",
-                       "age": 24,
-                       "cargo": "subjefe",
-                       "members": [{"nombre": "pedro",
-                                    "age": 23,
-                                    "cargo": "empleado",
-                                    "members": []} 
-                             ]
-                      }
-                     ],
-                     [{"nombre": "Juan1",
-                       "age": 24,
-                       "cargo": "subjefe",
-                       "members": [{"nombre": "pedro1",
-                                    "age": 23,
-                                    "cargo": "empleado",
-                                    "members": []}
-                             ]
-                      }
-                     ]
-         }
+member = [
+            {"name": "luis",
+             "age": 25,
+             "cargo": "Jefe 1",
+             "members": [{"nombre": "Juan",
+                          "age": 24,
+                          "cargo": "subjefe",
+                          "members": [{"nombre": "pedro",
+                                      "age": 23,
+                                        "cargo": "empleado",
+                                        "members": []} 
+                                     ]  
+                         }]
+            },
+            {"nombre": "Juan1",
+             "age": 24,
+             "cargo": "subjefe",
+             "members": [{"nombre": "pedro1",
+                          "age": 23,
+                          "cargo": "empleado",
+                          "members": []}
+                        ]
+            }
+         ]
 
 family = FamilyStructure("mi familia")
-family.add_member(self, member)
-family.add_member(self, {"name": "luis1","age": 25,"cargo": "Jefe 1","members": []})
-family.add_member(self, {"name": "luis2","age": 25,"cargo": "Jefe 1","members": []})
+family.add_member(member)
+family.add_member({"name": "luis1","age": 25,"cargo": "Jefe 1","members": []})
+family.add_member({"name": "luis2","age": 25,"cargo": "Jefe 1","members": []})
 print (family.last_name)
 print(family._members)
