@@ -7,6 +7,7 @@ update this file to implement the following already declared methods:
 - get_member: Should return a member from the self._members list 
 """
 from random import randint
+from flask import jsonify
 
 class FamilyStructure:
     def __init__(self, last_name):
@@ -20,24 +21,44 @@ class FamilyStructure:
         return randint(0, 99999999)
 
     def add_member(self, member):
-        print(member)
-        miembro = { "id": self._generateId(),
-                    "first_name": member.first_name,
-                    "last_name": self.last_name,
-                    "age": member.age,
-                    "lucky_members": member.lucky_members}
+        if member["age"] > 0:
+            miembro = { "id": self._generateId(),
+                        "first_name": member["first_name"],
+                        "last_name": self.last_name,
+                        "age": member["age"],
+                        "lucky_members": member["lucky_members"]}
 
-        # member['id'] = self._generateId()
-        self._members.append(miembro)
-        return self._members
+            self._members.append(miembro)
+            return {"miembro": miembro, "msg":"Creación con éxito"}
+        else:
+            return {"miembro": {},"msg":"error en la creación"}
 
     def delete_member(self, id):
-        # fill this method and update the return
-        pass
+        pos = -1
+        aux = 0
+
+        for e in self._members:
+            print(e["id"])
+            if e["id"] == id:
+                pos = aux
+                miembro = e
+            aux += 1
+
+        if pos != -1:
+            self._members.pop(pos)
+            return {"miembro": miembro, "msg":"Miembro " + miembro["first_name"]+ " Eliminado"}
+        else:
+            return {"miembro": {},"msg":"No existe el miembro: "+ str(id)}
+
 
     def get_member(self, id):
-        # fill this method and update the return
-        pass
+        members = self.get_all_members()
+
+        for e in members:
+            if e['first_name'] == "Luis": # e["id"] == id:
+                return e
+
+        return {}
 
     # this method is done, it returns a list with all the family members
     def get_all_members(self):

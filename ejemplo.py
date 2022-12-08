@@ -19,13 +19,19 @@ class FamilyStructure:
     def _generateId(self):
         return randint(0, 99999999)
 
-    def add_member(self, member):
+    def add_member(self, member1):
+        print('-----------------------------------------------------------')
+        print('-----------------------------------------------------------')
+        print(member1["firstName"])
+        print('-----------------------------------------------------------')
+        print('-----------------------------------------------------------')
+
         # fill this method and update the return
         miembro = { "id": self._generateId(),
-                    "first_name": member.first_name,
+                    "first_name": "Hola", #member1.firstName,
                     "last_name": self.last_name,
-                    "age": member.age,
-                    "lucky_members": member.lucky_members
+                    "age": member1.age,
+                    "lucky_members": memmember1ber.lucky_members
                   }
         # member['id'] = self._generateId()
         self._members.append(miembro)
@@ -69,8 +75,7 @@ member = [
          ]
 
 family = FamilyStructure("mi familia")
-family.add_member(member)
-family.add_member({"name": "luis1","age": 25,"cargo": "Jefe 1","members": []})
-family.add_member({"name": "luis2","age": 25,"cargo": "Jefe 1","members": []})
+# family.add_member(member)
+family.add_member({"firstName": "luis1","age": 25, "lucky_members":"hora"})
 print (family.last_name)
 print(family._members)
