@@ -55,7 +55,7 @@ class FamilyStructure:
         members = self.get_all_members()
 
         for e in members:
-            if e['first_name'] == "Luis": # e["id"] == id:
+            if e["id"] == id:  # e['first_name'] == "Luis": 
                 return e
 
         return {}

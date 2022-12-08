@@ -27,51 +27,53 @@ def sitemap():
 
 @app.route('/members', methods=['GET'])
 def getMembers():
-    jackson_family.add_member({"first_name": "Luis", "last_name": "otra familia", "age": 55, "lucky_members": [1,2]})
-    jackson_family.add_member({"first_name": "Luis2", "last_name": "otra familia", "age": 5, "lucky_members": [3,2]})
-           
-    # this is how you can use the Family datastructure by calling its methods
-    members = jackson_family.get_all_members()
-    response_body = {
-        "family": members
-    }
+    try:
+        members = jackson_family.get_all_members()
+        response_body = {
+            "family": members
+        }
 
-    return jsonify(response_body), 200
+        return jsonify(response_body), 200
+    except:
+        return jsonify("msg", "Error grave"), 500 
 
 
 @app.route('/members/<int:id>', methods=['GET'])
 def getMember(id):
-    jackson_family.add_member({"first_name": "Luis", "last_name": "otra familia", "age": 55, "lucky_members": [1,2]})
-    jackson_family.add_member({"first_name": "Luis2", "last_name": "otra familia", "age": 5, "lucky_members": [3,2]})
+    try:
+        miembro = jackson_family.get_member(id)
+        if miembro:
+            return jsonify(miembro) , 200
 
-    miembro = jackson_family.get_member(id)
-    if miembro:
-        return jsonify(miembro) , 200
-
-    return {"msg":"No se ha encontrado al miembro "+str(id)}, 404 
+        return {"msg":"No se ha encontrado al miembro "+str(id)}, 404 
+    except:
+        return jsonify("msg", "Error grave"), 500 
 
 
 @app.route('/member', methods=['POST'])
 def postMember():
-    data = request.json
-    res = jackson_family.add_member(data)
+    try:
+        data = request.json
+        res = jackson_family.add_member(data)
 
-    if res["miembro"]:
-        return jsonify(res["miembro"]) , 200
+        if res["miembro"]:
+            return jsonify(res["miembro"]) , 200
 
-    return jsonify({"msg":"NO se ha agregado con éxito al miembro "+str(data["first_name"])+" - "+res["msg"]}), 404 
-
+        return jsonify({"msg":"NO se ha agregado con éxito al miembro "+str(data["first_name"])+" - "+res["msg"]}), 404 
+    except:
+        return jsonify("msg", "Error grave"), 500 
 
 
 @app.route('/member/<int:id>', methods=['DELETE'])
 def deleteMember(id):
-    res = jackson_family.delete_member(id)
-    if res["miembro"]:
-        return jsonify(res["miembro"]) , 200
+    try:
+        res = jackson_family.delete_member(id)
+        if res["miembro"]:
+            return jsonify(res["miembro"]) , 200
 
-    return jsonify({"msg":res["msg"]}), 404 
-
-
+        return jsonify({"msg":res["msg"]}), 404 
+    except:
+        return jsonify("msg", "Error grave"), 500 
 
 
 # this only runs if `$ python src/app.py` is executed
