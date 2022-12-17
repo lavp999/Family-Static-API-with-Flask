@@ -36,7 +36,7 @@ def getMembers():
         return jsonify("msg", "Error grave"), 500 
 
 
-@app.route('/members/<int:id>', methods=['GET'])
+@app.route('/member/<int:id>', methods=['GET'])
 def getMember(id):
     try:
         miembro = jackson_family.get_member(id)
@@ -67,7 +67,7 @@ def deleteMember(id):
     try:
         res = jackson_family.delete_member(id)
         if res["miembro"]:
-            return jsonify(res["miembro"]) , 200
+            return jsonify({"done": True}), 200
 
         return jsonify({"msg":res["msg"]}), 404 
     except:

@@ -4,7 +4,7 @@ update this file to implement the following already declared methods:
 - add_member: Should add a member to the self._members list
 - delete_member: Should delete a member from the self._members list
 - update_member: Should update a member from the self._members list
-- get_member: Should return a member from the self._members list 
+- get_member: Should return a member from the self._members list  
 """
 from random import randint
 from flask import jsonify
@@ -18,17 +18,17 @@ class FamilyStructure:
                         "first_name": "John",
                         "last_name": self.last_name,
                         "age": 33,
-                        "lucky_members": [7, 13, 22]},
+                        "lucky_numbers": [7, 13, 22]},
                         {"id": self._generateId(),
                         "first_name": "Jane",
                         "last_name": self.last_name,
                         "age": 35,
-                        "lucky_members": [10, 14, 3]},
+                        "lucky_numbers": [10, 14, 3]},
                         {"id": self._generateId(),
                         "first_name": "Jimmy",
                         "last_name": self.last_name,
                         "age": 5,
-                        "lucky_members": [1]}
+                        "lucky_numbers": [1]}
                         ]
  
     # read-only: Use this method to generate random members ID's when adding members into the list
@@ -37,13 +37,14 @@ class FamilyStructure:
 
     def add_member(self, member):
         if member["age"] > 0:
-            miembro = { "id": self._generateId(),
+            miembro = {"id": (member["id"] if member["id"] else self._generateId()),
                         "first_name": member["first_name"],
                         "last_name": self.last_name,
                         "age": member["age"],
-                        "lucky_members": member[1,2]}
+                        "lucky_numbers": member["lucky_numbers"]}
 
             self._members.append(miembro)
+
             return {"miembro": miembro, "msg":"Creación con éxito"}
         else:
             return {"miembro": {},"msg":"error en la creación"}
