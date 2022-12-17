@@ -16,7 +16,7 @@ CORS(app)
 jackson_family = FamilyStructure("Jackson")
 
 # Handle/serialize errors like a JSON object
-@app.errorhandler(APIException)
+@app.errorhandler(APIException) 
 def handle_invalid_usage(error):
     return jsonify(error.to_dict()), error.status_code
 
@@ -29,9 +29,7 @@ def sitemap():
 def getMembers():
     try:
         members = jackson_family.get_all_members()
-        response_body = {
-            "family": members
-        }
+        response_body = members
 
         return jsonify(response_body), 200
     except:
